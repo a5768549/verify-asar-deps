@@ -1,0 +1,41 @@
+{
+  "name": "verify-asar-deps",
+  "version": "0.1.0",
+  "description": "Fail an Electron build when a package inside app.asar cannot resolve its dependencies (the pnpm + electron-builder ERR_MODULE_NOT_FOUND at launch). CLI and electron-builder afterPack hook.",
+  "license": "MIT",
+  "author": "a5768549",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a5768549/verify-asar-deps.git"
+  },
+  "homepage": "https://github.com/a5768549/verify-asar-deps#readme",
+  "bugs": "https://github.com/a5768549/verify-asar-deps/issues",
+  "keywords": ["electron", "asar", "electron-builder", "pnpm", "afterpack", "packaging", "ERR_MODULE_NOT_FOUND", "dependencies"],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "verify-asar-deps": "./dist/cli.js"
+  },
+  "files": ["dist", "src"],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test --experimental-strip-types test/index.test.ts",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@electron/asar": "^3.4.1",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}
